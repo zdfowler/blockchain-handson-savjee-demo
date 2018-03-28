@@ -31,10 +31,29 @@ class Blockchain {
         // Normally you'd have other checks here.
         this.chain.push(newBlock);
     }
+
+    isChainValid(){
+        for (let i=1; i < this.chain.length; i++) {
+            const currentBlock = this.chain[i];
+            const previousBlock = this.chain[i-1];
+
+            if (currentBlock.hash !== currentBlock.calculateHash()){
+                return false;
+            }
+
+            if (currentBlock.previousHash !== previousBlock.hash) {
+                return false;
+            }
+            
+        }
+        return true;
+    }
 }
 
 let zacCoin = new Blockchain();
 zacCoin.addBlock(new Block(1,"03/27/2018", {amount: 4}));
 zacCoin.addBlock(new Block(2,"03/28/2018", {amount: 6}));
 
-console.log(JSON.stringify(zacCoin, null, 4));
+console.log("Is blockchain valid?" + zacCoin.isChainValid());
+
+//console.log(JSON.stringify(zacCoin, null, 4));

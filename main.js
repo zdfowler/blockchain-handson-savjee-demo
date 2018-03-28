@@ -54,6 +54,12 @@ let zacCoin = new Blockchain();
 zacCoin.addBlock(new Block(1,"03/27/2018", {amount: 4}));
 zacCoin.addBlock(new Block(2,"03/28/2018", {amount: 6}));
 
-console.log("Is blockchain valid?" + zacCoin.isChainValid());
+console.log("Is blockchain valid? " + zacCoin.isChainValid());
+
+zacCoin.chain[1].data = {amount: 12};
+zacCoin.chain[1].hash = zacCoin.chain[1].calculateHash();
+
+console.log("Is blockchain valid? " + zacCoin.isChainValid());
+
 
 //console.log(JSON.stringify(zacCoin, null, 4));
